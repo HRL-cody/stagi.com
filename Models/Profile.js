@@ -4,12 +4,11 @@ const Schema = mongoose.Schema;
 // Create Schema
 const ProfileSchema = new Schema({
   user: {
-    type: Schema.Types.ObjectId,
-    ref: "users",
+    type: mongoose.Schema.ObjectId,
+    ref: "Users",
   },
   handle: {
     type: String,
-    required: true,
     max: 40,
   },
   company: {

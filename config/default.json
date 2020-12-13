@@ -1,4 +1,4 @@
 {
-    "mongoURI": "mongodb+srv://MdemaghHamouda:hamouda123@stagi.ckc1m.mongodb.net/<dbname>?retryWrites=true&w=majority",
+    "mongoURI": "mongodb+srv://MdemaghHamouda:hamouda95@hamouda.ckc1m.mongodb.net/<dbname>?retryWrites=true&w=majority",
     "jwtSecret":"myconfidentialtoken"
 }
