@@ -12,7 +12,6 @@ const Profile = require("../../Models/Profile");
 //@ access Public
 
 router.get("/me", auth, async (req, res) => {
-  //   console.log(req.user.id);
   try {
     const profile = await Profile.findOne({
       user: req.user.id,
@@ -58,7 +57,6 @@ router.post(
     if (skills) {
       profileFields.skills = skills.split(",").map((skill) => skill.trim());
     }
-    console.log("5raa");
     console.log(profileFields.skills);
     try {
       let profile = await Profile.findOne({ user: req.user.id });
@@ -96,17 +94,93 @@ router.get("/", async (req, res) => {
 router.get("/user/:user_id", async (req, res) => {
   try {
     const profile = await Profile.findOne({
-      user: req.params.user._id
+      user: req.params.user_id,
     }).populate("user", ["name", "avatar"]);
 
-    if (!profile)
-      return res
-        .status(400)
-        .json({ msg: "There is no profile for this user " });
-    res.json(profile)
+    if (!profile) return res.status(400).json({ msg: " Profile not found " });
+    res.json(profile);
+  } catch (err) {
+    console.error(err.message);
+    if (err.kind == "objectId") {
+      return res.status(400).json({ msg: "Profile not found " });
+    }
+    res.status(500).send("server Error");
+  }
+});
+
+//Delete   api/profile/
+//Delete   Delete Profile , user
+router.delete("/", auth, async (req, res) => {
+  try {
+    const profile = await Profile.findOneAndRemove(
+      { user: req.user.id },
+      { useFindAndModify: false }
+    );
+    await User.findOneAndRemove(
+      { _id: req.user.id },
+      { useFindAndModify: false }
+    );
+
+    res.json({ msg: "User removed" });
   } catch (err) {
     console.error(err.message);
     res.status(500).send("server Error");
   }
 });
+
+// Put api/profile/education
+// Add exp
+router.put(
+  "/education",
+  [
+    auth,
+    [
+      check("school", "school is require").not().isEmpty(),
+      check("degree", "degree is require").not().isEmpty(),
+      check("fieldofstudy", "Field of study is require").not().isEmpty(),
+      check("from", "From Date is require").not().isEmpty(),
+    ],
+  ],
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
+    const { school, degree, fieldofstudy, from, to } = req.body;
+
+    const newEducation = { school, degree, fieldofstudy, from, to };
+    try {
+      const profile = await Profile.findOne({ user: req.user.id });
+
+      profile.education.unshift(newEducation);
+      await profile.save();
+      res.json(profile);
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).send("Server Error");
+    }
+  }
+);
+
+//delet Education
+router.delete("/education/:edu_id", auth, async (req, res) => {
+  try {
+    const profile = await Profile.findOne({ user: req.user.id });
+
+    // Get remove index
+    const removeIndex = profile.education
+      .map((item) => item.id)
+      .indexOf(req.params.edu_id);
+
+    profile.education.splice(removeIndex, 1);
+
+    await profile.save();
+    res.json(profile);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+});
+
 module.exports = router;
