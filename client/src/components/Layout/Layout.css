@@ -1,0 +1,64 @@
+.ALL {
+  background: url(landingpage.png) #444;
+  background-size: cover;
+  padding-bottom: 35rem;
+}
+
+@media (min-width: 768px) {
+  .header-dark {
+    padding-bottom: 120px;
+  }
+}
+
+.header-dark .navbar {
+  background: transparent;
+  padding-top: 0;
+  padding-bottom: 0;
+  color: #fff;
+  border-radius: 0;
+  box-shadow: none;
+  border: none;
+}
+
+@media (min-width: 768px) {
+  .header-dark .navbar {
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+  }
+}
+
+.header-dark .navbar .navbar-brand {
+  font-weight: bold;
+  color: inherit;
+}
+
+.header-dark .navbar .navbar-brand:hover {
+  color: #f0f0f0;
+}
+
+.header-dark .navbar .navbar-collapse span .login {
+  color: #d9d9d9;
+  margin-right: 0.5rem;
+  text-decoration: none;
+}
+
+.header-dark .navbar .navbar-collapse span .login:hover {
+  color: #fff;
+}
+
+.header-dark .navbar .action-button,
+.header-dark .navbar .action-button:active {
+  background: #208f8f;
+  border-radius: 20px;
+  font-size: inherit;
+  color: #fff;
+  box-shadow: none;
+  border: none;
+  text-shadow: none;
+  padding: 0.5rem 0.8rem;
+  transition: background-color 0.25s;
+}
+
+.header-dark .navbar .action-button:hover {
+  background: #269d9d;
+}
