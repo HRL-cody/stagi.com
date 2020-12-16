@@ -1,0 +1,50 @@
+element.style {
+  width: 85rem;
+  height: 45rem;
+}
+.text-center{
+  color: antiquewhite;
+  margin-top: 12rem;
+}
+.navbar-brand {
+  display: inline-block;
+  padding-top: .3125rem;
+  padding-bottom: .3125rem;
+  margin-right: 1rem;
+  font-size: 2.25rem ;
+  font-weight: 900;
+  line-height: inherit;
+  white-space: nowrap;
+}
+
+
+.header-dark .navbar .action-button, .header-dark .navbar .action-button:active {
+  background: #208f8f;
+  border-radius: 20px;
+  font-size: inherit;
+  color: #fff;
+  box-shadow: none;
+  border: none;
+  text-shadow: none;
+  padding: .5rem .9rem;
+  margin: .9rem;
+  transition: background-color 0.25s;
+}
+.btn:not(:disabled):not(.disabled) {
+  cursor: pointer;
+}
+
+.header-dark {
+  background: url(ph1.png) #444 no-repeat;
+  background-size: cover;
+  padding-bottom: 40px;
+}
+
+@media (min-width:768px) {
+  .header-dark {
+    padding-bottom: 120px;
+  }
+}
+
+
+
