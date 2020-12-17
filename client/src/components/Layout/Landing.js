@@ -1,5 +1,5 @@
 import React from 'react'
-
+import {Link} from 'react-router-dom';
 const Landing = () => {
     return (
         <section className="landing">
@@ -7,11 +7,11 @@ const Landing = () => {
           <div className="landing-inner">
             <h1 className="x-large">Stagi TN</h1>
             <p className="lead">
-              Searrch for Your tranee here
+              Search for Your tranee here
             </p>
             <div className="buttons">
-              <a href="register.html" className="btn btn-primary">Sign Up</a>
-              <a href="login.html" className="btn btn-light">Login</a>
+              <Link to="/Register" className="btn btn-primary">Sign Up</Link>
+              <Link to="/Login" className="btn btn-light">Login</Link>
             </div>
           </div>
         </div>
