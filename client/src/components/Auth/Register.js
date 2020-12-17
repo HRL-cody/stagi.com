@@ -1,86 +1,93 @@
 import React, { Fragment, useState } from "react";
-import './Form.css'
-const Register = () => {
-    const [formData, setFormData] = useState({
-        name: '',
-        email:'',
-        password:''
-    });
+// import axios from "axios"
+import {Link} from "react-router-dom"
 
-    const {name , email , password} = formData;
+const Register = () => {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: "",
+    password2:"",
+  });
+
+  const { name, email, password, password2 } = formData;
+
+  const onChange = (e) =>
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+    
+    const onSubmit = async e  => {
+      e.preventDefault();
+      if(password !== password2){
+        console.log("pass not match")
+      }else{
+        console.log("nice")
+        // const newUser = {
+        //   name,
+        //   email,
+        //   password
+        // }
+        // try {
+        //   const config = {
+        //     headers: {
+        //       'content-Type': 'application/json'
+        //     }
+        //   }
+
+        //   const body = JSON.stringify(newUser);
+
+        //   const res = await axios.post('/api/users' , body , config);
+        //   console.log(res.data)
+        // } catch (err) {
+        //   console.error(err.response.data);
+        // }
+      }
+    };
   return (
     <Fragment>
-      <div className="page-wrapper bg-blue p-t-100 p-b-100 font-robo">
-        <div className="wrapper wrapper--w680">
-          <div className="card card-1">
-            <div className="card-heading" />
-            <div className="card-body">
-              <h2 className="title">Registration Info</h2>
-              <form method="POST">
-                <div className="input-group">
-                  <input
-                    className="input--style-1"
-                    type="text"
-                    placeholder="NAME"
-                    name="name"
-                  />
-                </div>
-                <div className="input-group">
-                <label for="email">Enter your @exemple.com email:</label>
-
-<input type="email" id="email"
-        size="50" required></input>
-
-                </div>
-                <div className="row row-space">
-                  <div className="col-2">
-                    <div className="input-group">
-                    <form action="action">
-  <label for="birthday">Birthday:</label>
-  <input type="date" id="birthday" name="birthday"></input>
-  
-</form>
-                    </div>
-                  </div>
-                  <div className="col-2">
-                    <div className="input-group">
-                      <div className="rs-select2 js-select-simple select--no-search">
-                        <select name="gender">
-                          <option disabled="disabled" selected="selected">
-                            Gender
-                          </option>
-                          <option>Male</option>
-                          <option>Female</option>
-                        </select>
-                        <div className="select-dropdown" />
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col-2">
-                    <div className="input-group">
-                      <div className="rs-select2 js-select-simple select--no-search">
-                        <select name="gender">
-                          <option disabled="disabled" selected="selected">
-                            Type
-                          </option>
-                          <option>Student</option>
-                          <option>Company</option>
-                        </select>
-                        <div className="select-dropdown" />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="p-t-20">
-                  <button className="btn btn--radius btn-primary" type="submit">
-                    Submit
-                  </button>
-                </div>
-              </form>
-            </div>
+      <section className="container">
+        <h1 className="large text-primary">Sign Up</h1>
+        <p className="lead">
+          <i className="fas fa-user"></i> Create Your Account
+        </p>
+        <form className="form" onSubmit={e => onSubmit(e)}>
+          <div className="form-group">
+            <input type="text" placeholder="Name" name="name" value={name} onChange= {e => onChange(e)} required />
           </div>
-        </div>
-      </div>
+          <div className="form-group">
+            <input type="email" placeholder="Email Address" name="email"
+            value={email}
+            onChange={e => onChange(e)}
+            required />
+          </div>
+          <div className="form-group">
+            <input
+              type="password"
+              placeholder="Password"
+              name="password"
+              minLength="8"
+              value={password}
+              onChange={e => onChange(e)}
+
+              required
+            />
+          </div>
+          <div className="form-group">
+            <input
+              type="password"
+              placeholder="Confirm Password"
+              name="password2"
+              minLength="8"
+              value={password2}
+              onChange={e => onChange(e)}
+              required
+            />
+          </div>
+          <input type="submit" className="btn btn-primary" value="Register" />
+        </form>
+        <p className="my-1">
+          Already have an account? <Link to="/Login">Sign In</Link>
+        </p>
+      </section>
     </Fragment>
   );
 };
