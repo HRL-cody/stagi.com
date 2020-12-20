@@ -1,47 +1,50 @@
 import React, { Fragment, useState } from "react";
 // import axios from "axios"
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { setAlert } from "../../actions/alert";
+import PropTypes from "prop-types";
 
-const Register = () => {
+const Register = ({ setAlert }) => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     password: "",
-    password2:"",
+    password2: "",
   });
 
   const { name, email, password, password2 } = formData;
 
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
-    
-    const onSubmit = async e  => {
-      e.preventDefault();
-      if(password !== password2){
-        console.log("pass not match")
-      }else{
-        console.log("nice")
-        // const newUser = {
-        //   name,
-        //   email,
-        //   password
-        // }
-        // try {
-        //   const config = {
-        //     headers: {
-        //       'content-Type': 'application/json'
-        //     }
-        //   }
 
-        //   const body = JSON.stringify(newUser);
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    if (password !== password2) {
+      setAlert("pass not match", "danger");
+    } else {
+      console.log("user Registred succsessfully");
+      // const newUser = {
+      //   name,
+      //   email,
+      //   password
+      // }
+      // try {
+      //   const config = {
+      //     headers: {
+      //       'content-Type': 'application/json'
+      //     }
+      //   }
 
-        //   const res = await axios.post('/api/users' , body , config);
-        //   console.log(res.data)
-        // } catch (err) {
-        //   console.error(err.response.data);
-        // }
-      }
-    };
+      //   const body = JSON.stringify(newUser);
+
+      //   const res = await axios.post('/api/users' , body , config);
+      //   console.log(res.data)
+      // } catch (err) {
+      //   console.error(err.response.data);
+      // }
+    }
+  };
   return (
     <Fragment>
       <section className="container">
@@ -49,15 +52,26 @@ const Register = () => {
         <p className="lead">
           <i className="fas fa-user"></i> Create Your Account
         </p>
-        <form className="form" onSubmit={e => onSubmit(e)}>
+        <form className="form" onSubmit={(e) => onSubmit(e)}>
           <div className="form-group">
-            <input type="text" placeholder="Name" name="name" value={name} onChange= {e => onChange(e)} required />
+            <input
+              type="text"
+              placeholder="Name"
+              name="name"
+              value={name}
+              onChange={(e) => onChange(e)}
+              required
+            />
           </div>
           <div className="form-group">
-            <input type="email" placeholder="Email Address" name="email"
-            value={email}
-            onChange={e => onChange(e)}
-            required />
+            <input
+              type="email"
+              placeholder="Email Address"
+              name="email"
+              value={email}
+              onChange={(e) => onChange(e)}
+              required
+            />
           </div>
           <div className="form-group">
             <input
@@ -66,8 +80,7 @@ const Register = () => {
               name="password"
               minLength="8"
               value={password}
-              onChange={e => onChange(e)}
-
+              onChange={(e) => onChange(e)}
               required
             />
           </div>
@@ -78,7 +91,7 @@ const Register = () => {
               name="password2"
               minLength="8"
               value={password2}
-              onChange={e => onChange(e)}
+              onChange={(e) => onChange(e)}
               required
             />
           </div>
@@ -91,4 +104,7 @@ const Register = () => {
     </Fragment>
   );
 };
-export default Register;
+Register.propTypes = {
+  setAlert: PropTypes.func.isRequired,
+};
+export default connect(null, { setAlert })(Register);

@@ -1,14 +1,10 @@
 
-/* ==========================================================================
-   #FONT
-   ========================================================================== */
+
    .font-robo {
     font-family: "Roboto", "Arial", "Helvetica Neue", sans-serif;
   }
   
-  /* ==========================================================================
-     #GRID
-     ========================================================================== */
+
   .row {
     display: -webkit-box;
     display: -webkit-flex;
@@ -39,14 +35,8 @@
       width: 100%;
     }
   }
+ 
   
-  /* ==========================================================================
-     #BOX-SIZING
-     ========================================================================== */
-  /**
-   * More sensible default box-sizing:
-   * css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice
-   */
   html {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
